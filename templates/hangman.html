@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Hangman Game</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <p class="lead">{{ hangman_game.display_word() }}</p>
+            </div>
+            <div class="col-md-6">
+                <p class="lead">Wrong Letters: {{ ', '.join(hangman_game.wrong_letters) }}</p>
+            </div>
+        </div>
+        <form method="post" action="{{ url_for('index') }}" class="mt-4">
+            <div class="form-group">
+                <label for="guess">Enter your guess:</label>
+                <input type="text" id="guess" name="guess" class="form-control" maxlength="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guess</button>
+        </form>
+        <div class="mt-4">
+            {% for message in get_flashed_messages() %}
+                <p class="alert alert-info">{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
